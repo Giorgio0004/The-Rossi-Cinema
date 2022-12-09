@@ -34,7 +34,8 @@ async function CaricaSessioni(ID,divFilm){
             //crea div sessione
             var div = document.createElement("div");
             div.setAttribute("id", "sessione"+i);
-            div.setAttribute("onclick", "sessione()");
+            div.setAttribute("value", "sessione"+i);
+            div.setAttribute("onclick", "sessione(this)");
             div.setAttribute("class", "div-sessione");
             document.getElementById(divFilm).appendChild(div);
 
@@ -97,6 +98,8 @@ function CreaDiv(films){
     
 }
 
-function sessione(){
+function sessione(value){
     //passa sessione sui posti
+    //$.post("film.php", {res_id:res_id, res_level:res_level});
+    alert(value);
 }
