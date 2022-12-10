@@ -14,7 +14,8 @@ async function CaricaPosti(){
     })
     .then(res => res.json())
     .then((data) => {
-        
+        //console.log(data.dataSessione);
+        document.getElementById("data").innerText = "Data: "+ data.dataSessione.Data + " \nSala: " + data.dataSessione.Sala;
         // Posti non disponibili
         for(let i=0; i<data.success.length;i++){
             document.getElementById(data.success[i].Posto).style.backgroundColor='#999999';

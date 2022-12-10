@@ -1,3 +1,5 @@
+let arraySessioni;
+let indexSessioneSelezionata;
 async function CaricaFilms(){
     let data = {
         sql: "SELECT * FROM film",
@@ -11,14 +13,14 @@ async function CaricaFilms(){
     })
     .then(res => res.json())
     .then((data) => {
-        console.log(data.success);
+        //console.log(data.success);
         CreaDiv(data.success);
     })
 }
 
 async function CaricaSessioni(ID,divFilm){
     let data = {
-        sql : "SELECT Sala,Data FROM `sessione` INNER JOIN film ON ID_Film = film.ID WHERE film.ID = "+ID,
+        sql : "SELECT sessione.ID,Sala,Data,film.Titolo FROM `sessione` INNER JOIN film ON ID_Film = film.ID WHERE film.ID = "+ID,
     };
     const response = await fetch('film.php', {
         method: 'POST',
@@ -29,25 +31,35 @@ async function CaricaSessioni(ID,divFilm){
     })
     .then(res => res.json())
     .then((data) => {
+        arraySessioni = data.success;
         for(let i=0; i<data.success.length;i++){
             
             //crea div sessione
-            var div = document.createElement("div");
-            div.setAttribute("id", "sessione"+i);
-            div.setAttribute("value", "sessione"+i);
-            div.setAttribute("onclick", "sessione(this)");
-            div.setAttribute("class", "div-sessione");
-            document.getElementById(divFilm).appendChild(div);
+            // var div = document.createElement("div");
+            // div.setAttribute("id", "sessione"+i);
+            // div.setAttribute("value", "sessione"+i);
+            // div.setAttribute("onclick", "sessione(this)");
+            // div.setAttribute("class", "div-sessione");
+            // document.getElementById(divFilm).appendChild(div);
 
-            //crea data
-            let datatime = document.createElement("h4");
-            datatime.innerHTML = data.success[i].Data;
-            document.getElementById("sessione"+i).appendChild(datatime);
+            // //crea data
+            // let datatime = document.createElement("h4");
+            // datatime.innerHTML = data.success[i].Data;
+            // document.getElementById("sessione"+i).appendChild(datatime);
 
-            //crea sala
-            let sala = document.createElement("h4");
-            sala.innerHTML = data.success[i].Sala;
-            document.getElementById("sessione"+i).appendChild(sala);
+            // //crea sala
+            // let sala = document.createElement("h4");
+            // sala.innerHTML = data.success[i].Sala;
+            // document.getElementById("sessione"+i).appendChild(sala);
+
+            let button = document.createElement("button");
+            button.setAttribute("onclick", "Sessione(this)");
+            //button.setAttribute("id", "sessione"+i);
+            button.setAttribute("value", data.success[i].ID);
+            button.setAttribute("class", "div-sessione");
+            button.innerHTML = data.success[i].Data + "\n" + data.success[i].Sala;;
+            document.getElementById(divFilm).appendChild(button);
+
         }
     })
 }
@@ -94,12 +106,41 @@ function CreaDiv(films){
         document.getElementById(films[0].Titolo).appendChild(durata);
 
         CaricaSessioni(films[i].ID,films[0].Titolo);
-    }
-    
+    }    
 }
 
-function sessione(value){
+
+async function Sessione(sessione){
     //passa sessione sui posti
-    //$.post("film.php", {res_id:res_id, res_level:res_level});
-    alert(value);
+    let titoloFilmScelto;
+    for(let i=0; i<arraySessioni.length;i++){
+        if(arraySessioni[i].ID == sessione.value){
+            titoloFilmScelto = arraySessioni[i].Titolo;
+            indexSessioneSelezionata = i;
+        }
+        
+    }
+    
+    //console.log(arraySessioni[indexSessioneSelezionata]);
+    let data = {
+        infoSessione: arraySessioni[indexSessioneSelezionata],
+        TitoloFilmSessione: titoloFilmScelto,
+
+    };
+    const response = await fetch('film.php', {
+        method: 'POST',
+        headers:{
+            "Content-Type" : "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(res => res.json())
+    .then((data) => {
+        
+        if(data.success == "OK"){
+            window.location.href = "../Posti/Posti.html";
+        }
+        //else
+    })
 }
+
