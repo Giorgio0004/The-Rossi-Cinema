@@ -33,25 +33,7 @@ async function CaricaSessioni(ID,divFilm){
     .then((data) => {
         arraySessioni = data.success;
         for(let i=0; i<data.success.length;i++){
-            
-            //crea div sessione
-            // var div = document.createElement("div");
-            // div.setAttribute("id", "sessione"+i);
-            // div.setAttribute("value", "sessione"+i);
-            // div.setAttribute("onclick", "sessione(this)");
-            // div.setAttribute("class", "div-sessione");
-            // document.getElementById(divFilm).appendChild(div);
-
-            // //crea data
-            // let datatime = document.createElement("h4");
-            // datatime.innerHTML = data.success[i].Data;
-            // document.getElementById("sessione"+i).appendChild(datatime);
-
-            // //crea sala
-            // let sala = document.createElement("h4");
-            // sala.innerHTML = data.success[i].Sala;
-            // document.getElementById("sessione"+i).appendChild(sala);
-
+        
             let button = document.createElement("button");
             button.setAttribute("onclick", "Sessione(this)");
             //button.setAttribute("id", "sessione"+i);
