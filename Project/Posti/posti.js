@@ -14,8 +14,8 @@ async function CaricaPosti(){
     })
     .then(res => res.json())
     .then((data) => {
-        //console.log(data.dataSessione);
-        document.getElementById("data").innerText = "Data: "+ data.dataSessione.Data + " \nSala: " + data.dataSessione.Sala;
+        //console.log(data);
+        document.getElementById("data").innerText = "Data: "+ data.dataSessione.Data + " \nSala: " + data.dataSessione.Sala +"\nFilm: "+ data.dataSessione.Titolo;
         // Posti non disponibili
         for(let i=0; i<data.success.length;i++){
             document.getElementById(data.success[i].Posto).style.backgroundColor='#999999';
@@ -31,7 +31,7 @@ function PrenotaPosto(posto){
         document.getElementById(posto.value).style.backgroundColor='#000000';
         posti.push(posto.value);
         
-        var div = document.createElement("div");
+        let div = document.createElement("div");
         div.setAttribute("id", posto.value+"_");
         div.innerHTML=posto.value;
         document.getElementById("div-prezzo-posti").appendChild(div);
@@ -48,4 +48,23 @@ function PrenotaPosto(posto){
     document.getElementById("prezzo").innerHTML = prezzoTotale;
 }
 
-
+async function CaricaPostiSession(){
+    
+    let data = {
+        postiSessione: posti,
+        prezzo: document.getElementById("prezzo").innerHTML,
+    };
+    const response = await fetch('posti.php', {
+        method: 'POST',
+        headers:{
+            "Content-Type" : "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(res => res.json())
+    .then((data) => {
+        if(data.success == "OK"){
+            window.location.href="../Preview/preview.html";
+        }
+    })
+}

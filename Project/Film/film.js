@@ -20,7 +20,7 @@ async function CaricaFilms(){
 
 async function CaricaSessioni(ID,divFilm){
     let data = {
-        sql : "SELECT sessione.ID,Sala,Data,film.Titolo FROM `sessione` INNER JOIN film ON ID_Film = film.ID WHERE film.ID = "+ID,
+        sql : "SELECT sessione.ID,Sala,Data,film.Titolo,film.Copertina FROM `sessione` INNER JOIN film ON ID_Film = film.ID WHERE film.ID = "+ID,
     };
     const response = await fetch('film.php', {
         method: 'POST',
@@ -94,19 +94,21 @@ function CreaDiv(films){
 
 async function Sessione(sessione){
     //passa sessione sui posti
-    let titoloFilmScelto;
+    let FilmScelto = {Titolo:"", Copertina:""};
     for(let i=0; i<arraySessioni.length;i++){
         if(arraySessioni[i].ID == sessione.value){
-            titoloFilmScelto = arraySessioni[i].Titolo;
+            FilmScelto.Titolo = arraySessioni[i].Titolo;
+            FilmScelto.Copertina = arraySessioni[i].Copertina;
             indexSessioneSelezionata = i;
         }
         
     }
+    //console.log(FilmScelto);
     
     //console.log(arraySessioni[indexSessioneSelezionata]);
     let data = {
         infoSessione: arraySessioni[indexSessioneSelezionata],
-        TitoloFilmSessione: titoloFilmScelto,
+        FilmSessione: FilmScelto,
 
     };
     const response = await fetch('film.php', {

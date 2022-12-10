@@ -24,10 +24,10 @@ if(isset($data["sql"])!=null){
 
 else{
     $Sessione= $data["infoSessione"];
-    $TitoloFilmS= $data["TitoloFilmSessione"];
+    $Film= $data["FilmSessione"];
 
     $_SESSION["idSessione"] = $Sessione;
-    $_SESSION["TitoloFilm"] = $TitoloFilmS;
+    $_SESSION["Film"] = $Film;
 
     $responseData = [
         "success" => "OK"

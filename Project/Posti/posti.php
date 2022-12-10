@@ -2,25 +2,43 @@
 session_start();
 require_once "../dbConfig.php";
 
-global $dbh;
+$data = json_decode(file_get_contents('php://input'), true);
 
-$Sessione = $_SESSION["idSessione"];
-$IDSessione=$Sessione["ID"];
+if($data!=null){
+    $_SESSION["posti"] = $data["postiSessione"];
+    $_SESSION["prezzoTotale"] = $data["prezzo"];
+    
+    $responseData = [
+        "success" => "OK",
+    ];
+    
+    header("Content-Type: application/json");
+    echo json_encode($responseData);
+}
+else
+{
+    global $dbh;
 
-//var_dump($Sessione);
+    $Sessione = $_SESSION["idSessione"];
+    $IDSessione=$Sessione["ID"];
+    
+    //var_dump($Sessione);
+    
+    $sql = "SELECT Posto,ID_User FROM posti WHERE ID_Sessione = ".$IDSessione;
+    $query = $dbh->prepare($sql);
+    //Execute the query:
+    $query->execute();
+    $results=$query->fetchAll(PDO::FETCH_OBJ);
+    
+    $responseData = [
+        "success" => $results,
+        "dataSessione" => $Sessione
+    ];
+    
+    header("Content-Type: application/json");
+    echo json_encode($responseData);
+}
 
-$sql = "SELECT Posto,ID_User FROM posti WHERE ID_Sessione = ".$IDSessione;
-$query = $dbh->prepare($sql);
-//Execute the query:
-$query->execute();
-$results=$query->fetchAll(PDO::FETCH_OBJ);
 
-$responseData = [
-    "success" => $results,
-    "dataSessione" => $Sessione
-];
-
-header("Content-Type: application/json");
-echo json_encode($responseData);
 
 ?>
