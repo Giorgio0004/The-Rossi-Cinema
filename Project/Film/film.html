@@ -7,20 +7,11 @@
     <title>Film disponibili</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
-    <script src="film.js"></script>
+    <script src="film1.js"></script>
+    <script src="../Accesso/logout.js"></script>
     <link rel="stylesheet" href="style.css">
 </head>
 <body onload="CaricaFilms()">
-    <!--<div>
-        <h1>Film disponibili</h1>
-    </div>
-    <div id="div-films">
-        
-    </div>
-    
--->
-
-
 
 <div class="min-h-screen bg-gray-900 justify-center" id="films">
     <div class="antialiased bg-gray-100 dark-mode:bg-gray-900 sticky top-0">
@@ -28,7 +19,7 @@
             <div x-data="{ open: true }" class="flex flex-col max-w-screen-xl px-4 mx-auto md:items-center md:justify-between md:flex-row md:px-6 lg:px-8 max-h-20 pb-2 pt-2">
       
                 <div class="inline-flex">
-                    <a class="_o6689fn" href="/"
+                    <a class="_o6689fn" href="../Film/film.html"
                         ><div class="hidden md:block">
                             <img width="80"  fill="currentcolor" style="display: block" src="../../assets/logorossi_PICCOLO.png">
                                 
@@ -38,6 +29,7 @@
                 </div>
 
                 <nav :class="{'flex': open, 'hidden': !open}" class="flex-col flex-grow hidden pb-4 md:pb-0 md:flex md:justify-end md:flex-row ">
+                <h3 class="mt-2" id="NomeUtente"></h3>
                 <div class="block flex-grow-0 flex-shrink-0 h-10 w-12 pl-5">
                     <svg
                         viewBox="0 0 32 32"
@@ -63,7 +55,7 @@
                         <div class="px-1 pt-1 pb-4 bg-white block rounded-md shadow-lg dark-mode:bg-gray-700">
                         
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 ">
-                            <a class="flex flex row items-start rounded-lg bg-transparent p-2 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" href="#">
+                            <a class="flex flex row items-start rounded-lg bg-transparent p-2 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" href="../Accesso/login.html">
                             <div class="ml-3 ">
                                 <li>
                                     <u class="font-semibold no-underline">Accedi</u>
@@ -73,7 +65,7 @@
                             </div>
                             </a>
 
-                            <a class="flex flex row items-start rounded-lg bg-transparent p-2 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" href="#">
+                            <a class="flex flex row items-start rounded-lg bg-transparent p-2 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" href="../Accesso/register.html">
                             <div class="ml-3">
                                 <li>
                                 <u class="font-semibold no-underline">Iscriviti</u>
@@ -82,14 +74,14 @@
                             </div>
                             </a>
 
-                            <a class="flex flex row items-start rounded-lg bg-transparent p-2 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" href="#">
+                            <button class="flex flex row items-start rounded-lg bg-transparent p-2 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" onclick="logOut()">
                             <div class="ml-3">
                                 <li>
                                     <u class="font-semibold no-underline">Esci</u>
                                 </li>
                                 <p class="text-sm text-amber-500">Esci dal tuo account</p>
                             </div>
-                            </a>
+                            </button>
                         </div>
                     </div>
                 </div>

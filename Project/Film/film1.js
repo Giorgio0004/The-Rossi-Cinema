@@ -1,6 +1,6 @@
 //passare sia ID film che ID Sessione
 
-
+let idFilm = [];
 let arraySessioni =[];
 let indexSessioneSelezionata;
 async function CaricaFilms(){
@@ -34,10 +34,11 @@ async function CaricaSessioni(ID,divFilm){
     })
     .then(res => res.json())
     .then((data) => {
+        document.getElementById("NomeUtente").innerHTML = data.Utente;
         arraySessioni.push(data.success);
-
         for(let i=0; i<data.success.length;i++){
 
+            idFilm.push(ID);
             let button = document.createElement("button");
             button.setAttribute("onclick", "Sessione(this)");
             
@@ -47,7 +48,9 @@ async function CaricaSessioni(ID,divFilm){
             document.getElementById(divFilm).appendChild(button);
 
         }
+        
     })
+
 }
 
 function CreaDiv(films){
@@ -122,33 +125,18 @@ function CreaDiv(films){
 
 async function Sessione(sessione){
     //passa sessione sui posti
-    let FilmScelto = {Titolo:"", Copertina:""};
     
+    let indexFilm= idFilm[(sessione.value)-1];
+    indexFilm--;
 
-
-    console.log(arraySessioni[sessione.value-1]);
-
-    /*for(let i=0; i<arraySessioni.length;i++){
-        for(let y=0;y<arraySessioni[0].length;y++){
-            console.log(arraySessioni[i].ID);
-            if(arraySessioni[i].ID[y] == sessione.value){
-                console.log(arraySessioni[i].Titolo);
-                FilmScelto.Titolo = arraySessioni[i][y].Titolo;
-                FilmScelto.Copertina = arraySessioni[i][y].Copertina;
-                indexSessioneSelezionata = i;
-            }
+    for(let i=0;i<arraySessioni[indexFilm].length;i++){
+        if(arraySessioni[indexFilm][i].ID == sessione.value){
+            indexSessioneSelezionata = i;
         }
-        
-        
     }
-    
-    
-    
-    //console.log(arraySessioni[indexSessioneSelezionata]);
-    let data = {
-        infoSessione: arraySessioni[indexSessioneSelezionata],
-        FilmSessione: FilmScelto,
 
+    let data = {
+        infoSessione: arraySessioni[indexFilm][indexSessioneSelezionata],
     };
     const response = await fetch('film.php', {
         method: 'POST',
@@ -161,8 +149,9 @@ async function Sessione(sessione){
     .then((data) => {
         
         if(data.success == "OK"){
-            window.location.href = "../Posti/Posti.html";
+            window.location.href = "../Posti/Posti1.html";
         }
         //else
-    })*/
+    })
+
 }

@@ -1,5 +1,5 @@
 <?php
-require_once "dbConfig.php";
+require_once "../dbConfig.php";
 
 
 global $dbh;
@@ -16,6 +16,7 @@ if(session_status() === PHP_SESSION_NONE){
                 $_SESSION["LogIn"]=true;
                 $_SESSION["Utente"]=$usn;
                 $_SESSION["Password"]=$psw;
+                $_SESSION["IDUtente"] = $results[0]->ID;
 
                 $responseData = [
                     "success" => true
@@ -33,6 +34,15 @@ if(session_status() === PHP_SESSION_NONE){
                 echo json_encode($responseData);
                 //header('Location: http:localhost/ProgettoGruppoTre/Project/login.html');
             }
+        }
+        else
+        {
+            $responseData = [
+                "success" => false
+            ];
+        
+            header("Content-Type: application/json");
+            echo json_encode($responseData); 
         }
     }
 }

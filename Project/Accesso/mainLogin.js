@@ -34,11 +34,11 @@ loginSubmitButton.addEventListener('click', async (e) => {
     .then(res => res.json())
     .then((data) => {
         if(!data.success){
-            document.getElementById("infoSuccessLogin").innerText="Username o password sbagliata!";
+            document.getElementById("infoSuccessLogin").innerHTML="Username o password sbagliata!";
         }
         else{
             document.getElementById("infoSuccessLogin").innerText="";
-            window.location.href = "primaParte.html";
+            window.location.href = "../Film/film.html";
         }
     })
 });

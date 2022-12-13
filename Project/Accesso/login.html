@@ -4,14 +4,32 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dental Clinic</title>
-    <link rel="icon" type="image/x-icon" href="../assets/thoot-logo.jpg">
+    <title>The Rossi Cinema</title>
     <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
     <section id="app" class="bg-blue-50 dark:bg-gray-900">
-        <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+        <div class="min-h-screen bg-gray-900 justify-center" id="films">
+            <div class="antialiased bg-gray-100 dark-mode:bg-gray-900 sticky top-0">
+                <div class="w-full text-gray-700 bg-gray-200 ">
+                    <div x-data="{ open: true }" class="flex flex-col max-w-screen-xl px-4 mx-auto md:items-center md:justify-between md:flex-row md:px-6 lg:px-8 max-h-20 pb-2 pt-2">
+              
+                        <div class="inline-flex">
+                            <a class="_o6689fn" href="../Film/film.html"
+                                ><div class="hidden md:block">
+                                    <img width="80"  fill="currentcolor" style="display: block" src="../../assets/logorossi_PICCOLO.png">
+                                        
+                                </div>
+                            </a>
+                            <h1 class="text-4xl mt-2 text-amber-500">The Rossi Cinema</h1>
+                        </div>
+        
+                </div>
+                
+            </div>
+            </div>
+        <div class="flex flex-col items-center justify-center mt-10">
             <a href="#" class="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">    
             </a>
             <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
@@ -35,8 +53,7 @@
                             </label>
                         </div>
                         <div class="flex items-center justify-between ">
-                            <label id="infoSuccessLogin" class="block mb-2 text-sm font-medium text-red-600 dark:text-red-600"></label>
-                            <a href="PasswordDimenticataRichiediEmail.html" class="text-sm  mb-2 font-medium text-primary-600 hover:underline dark:text-white ">Password dimenticata?</a>
+                            <label id="infoSuccessLogin" class="block mb-2 text-sm font-medium text-red-600"></label>
                         </div>
                         
                         <button type="submit" id="login-submit-button" name="LoginButton" class="w-full bg-indigo-500 text-white hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Entra</button>
@@ -48,6 +65,6 @@
             </div>
         </div>
       </section>
-   <script src="main.js"></script> 
+   <script src="mainLogin.js"></script> 
 </body>
 </html>

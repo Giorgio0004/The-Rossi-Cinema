@@ -9,7 +9,7 @@ if($data!=null){
     $_SESSION["prezzoTotale"] = $data["prezzo"];
     
     $responseData = [
-        "success" => "OK",
+        "success" => "OK"
     ];
     
     header("Content-Type: application/json");
@@ -32,7 +32,8 @@ else
     
     $responseData = [
         "success" => $results,
-        "dataSessione" => $Sessione
+        "dataSessione" =>$_SESSION["idSessione"],
+        "Utente" => $_SESSION["Utente"]
     ];
     
     header("Content-Type: application/json");

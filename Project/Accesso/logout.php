@@ -1,8 +1,19 @@
 <?php
-    $data = json_decode(file_get_contents('php://input'));
-    $msg = $data['message'];
+    session_start();
 
-    if($msg == 'exit'){
-        session_destroy();
+    if($_SESSION["LogIn"]==true)
+    {
+        $_SESSION["IDUtente"] = "";
+        $_SESSION["Utente"]="";
+        $_SESSION["LogIn"]==false;
+        //session_destroy();
     }
+    
+
+    $responseData = [
+        "success" => "OK"
+    ];
+    
+    header("Content-Type: application/json");
+    echo json_encode($responseData);
 ?>
