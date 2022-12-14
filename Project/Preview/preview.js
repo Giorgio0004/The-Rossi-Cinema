@@ -9,7 +9,17 @@ async function CaricaPreview(){
     })
     .then(res => res.json())
     .then((data) => {
-        document.getElementById("NomeUtente").innerHTML = data.Utente;
+        
+        if(data.Utente!= undefined)
+        {
+            document.getElementById("NomeUtente").innerHTML = data.Utente;
+        }
+        else{
+            document.getElementById("NomeUtente").innerText = "";
+        }
+
+        document.getElementById("acquistoConfermato").innerText = "";
+        document.getElementById("PaginaPrincipale").innerText = "";
         document.getElementById("copertina").src = data.Film.Copertina;
         document.getElementById("titolo").innerText = data.Film.Titolo;
         AggiungiPosti(data);
@@ -55,7 +65,12 @@ async function InserisciPosti(){
     }
 }
 
-async function ConfermaPagamento(){
-    await delay(5000);
-    window.location.href="../Film/film.html";
+
+function ConfermaPagamento() {
+    document.getElementById("acquistoConfermato").innerText = "Acquisto Confermato!!";
+    document.getElementById("PaginaPrincipale").innerText = "Verrai riportato alla Pagina principale!";
+    setTimeout(function () {
+        
+        window.location.href="../Film/film.html";
+    }, 5000);
 }

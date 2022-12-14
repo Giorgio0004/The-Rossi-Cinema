@@ -14,11 +14,18 @@ if(isset($data["sql"])!=null){
     //Execute the query:
     $query->execute();
     $results=$query->fetchAll(PDO::FETCH_OBJ);
+    if(isset($_SESSION['Utente'])){
+        $responseData = [
+            "success" => $results,
+            "Utente" => $_SESSION["Utente"]
+        ];
+    }
+    else{
+        $responseData = [
+            "success" => $results,
+        ];
+    }
     
-    $responseData = [
-        "success" => $results,
-        "Utente" => $_SESSION["Utente"]
-    ];
     
     header("Content-Type: application/json");
     echo json_encode($responseData);

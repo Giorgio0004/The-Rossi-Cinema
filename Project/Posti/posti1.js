@@ -14,7 +14,13 @@ async function CaricaPosti(){
     })
     .then(res => res.json())
     .then((data) => {
-        document.getElementById("NomeUtente").innerHTML = data.Utente;
+        if(data.Utente!= undefined)
+        {
+            document.getElementById("NomeUtente").innerHTML = data.Utente;
+        }
+        else{
+            document.getElementById("NomeUtente").innerText = "";
+        }
         document.getElementById("copertinaPosti").src = data.dataSessione.Copertina;
         document.getElementById("data").innerText = data.dataSessione.Titolo+ "\nData: "+ data.dataSessione.Giorno +"\n Ora: "+ data.dataSessione.Ora + " \nSala: " + data.dataSessione.Sala;
         // Posti non disponibili

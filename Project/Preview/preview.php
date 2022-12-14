@@ -5,12 +5,22 @@ require_once "../dbconfig.php";
 $data = json_decode(file_get_contents('php://input'), true);
 
 if($data==null){
-    $responseData = [
-        "Film" => $_SESSION["idSessione"],
-        "Posti" => $_SESSION["posti"],
-        "Prezzo" => $_SESSION["prezzoTotale"],
-        "Utente" => $_SESSION["Utente"]
-    ];
+    if(isset($_SESSION['Utente'])){
+        $responseData = [
+            "Film" => $_SESSION["idSessione"],
+            "Posti" => $_SESSION["posti"],
+            "Prezzo" => $_SESSION["prezzoTotale"],
+            "Utente" => $_SESSION["Utente"]
+        ];
+    }
+    else{
+        $responseData = [
+            "Film" => $_SESSION["idSessione"],
+            "Posti" => $_SESSION["posti"],
+            "Prezzo" => $_SESSION["prezzoTotale"],
+        ];
+    }
+    
     
     header("Content-Type: application/json");
     echo json_encode($responseData);

@@ -34,7 +34,15 @@ async function CaricaSessioni(ID,divFilm){
     })
     .then(res => res.json())
     .then((data) => {
-        document.getElementById("NomeUtente").innerHTML = data.Utente;
+        //console.log(data.Utente);
+        
+        if(data.Utente!= undefined)
+        {
+            document.getElementById("NomeUtente").innerHTML = data.Utente;
+        }
+        else{
+            document.getElementById("NomeUtente").innerText = "";
+        }
         arraySessioni.push(data.success);
         for(let i=0; i<data.success.length;i++){
 

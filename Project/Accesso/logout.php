@@ -1,11 +1,12 @@
 <?php
     session_start();
 
-    if($_SESSION["LogIn"]==true)
+    if(isset($_SESSION["LogIn"])==true && $_SESSION["LogIn"]==true)
     {
         $_SESSION["IDUtente"] = "";
         $_SESSION["Utente"]="";
         $_SESSION["LogIn"]==false;
+        
         //session_destroy();
     }
     

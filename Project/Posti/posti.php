@@ -30,11 +30,22 @@ else
     $query->execute();
     $results=$query->fetchAll(PDO::FETCH_OBJ);
     
-    $responseData = [
-        "success" => $results,
-        "dataSessione" =>$_SESSION["idSessione"],
-        "Utente" => $_SESSION["Utente"]
-    ];
+    if(isset($_SESSION['Utente'])){
+        $responseData = [
+            "success" => $results,
+            "dataSessione" =>$_SESSION["idSessione"],
+            "Utente" => $_SESSION["Utente"]
+        ];
+    }
+    else
+    {
+        $responseData = [
+            "success" => $results,
+            "dataSessione" =>$_SESSION["idSessione"],
+            
+        ];
+    }
+    
     
     header("Content-Type: application/json");
     echo json_encode($responseData);
